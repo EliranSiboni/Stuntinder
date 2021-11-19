@@ -1,3 +1,5 @@
+export const LOCAL_STORAGE_KEY = "workers";
+
 export const workers = [
   {
     id: 1,
