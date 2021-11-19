@@ -1,0 +1,55 @@
+.buttons-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.buttons-wrapper__items-wrapper {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.items-wrapper__approve-btn {
+  border: none;
+  background: none;
+  font-size: 40px;
+  border-radius: 50px;
+  box-shadow: rgb(136 136 136 / 53%) 5px 5px 5px;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.items-wrapper__reject-btn {
+  border: none;
+  background: none;
+  font-size: 40px;
+  color: #eb3434;
+  border-radius: 50px;
+  width: 60px;
+  height: 60px;
+  box-shadow: rgb(136 136 136 / 53%) 5px 5px 5px;
+  cursor: pointer;
+}
+
+.items-wrapper__approve-btn > .approve-btn {
+  color: #009e2d;
+}
+
+.items-wrapper__approve-btn:hover > .approve-btn {
+  color: white;
+}
+
+.items-wrapper__approve-btn:hover {
+  background-color: #009e2d;
+}
+
+.items-wrapper__reject-btn:hover {
+  color: white;
+  background-color: #eb3434;
+}
