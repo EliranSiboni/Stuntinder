@@ -7,8 +7,9 @@ import { workers, LOCAL_STORAGE_KEY } from "../workers";
 const CardStack = () => {
   const [workersAfterSwipe, setSwipedWorkers] = useState([]);
   const [availableWorkers, setAvailableWorkers] = useState(workers);
-  const [currentIndex, setCurrentIndex] = useState(availableWorkers.length - 1);
 
+  // init current ref index
+  const [currentIndex, setCurrentIndex] = useState(availableWorkers.length - 1);
   const currentIndexRef = useRef(currentIndex);
   const canSwipe = currentIndex >= 0;
 
@@ -37,6 +38,7 @@ const CardStack = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(workersAfterSwipe));
   }, [workersAfterSwipe]);
 
+  // create ref to all cards and
   const childRefs = useMemo(
     () =>
       Array(availableWorkers.length)
@@ -45,9 +47,17 @@ const CardStack = () => {
     []
   );
 
+  // current ref index update
   const updateCurrentIndex = (val) => {
     setCurrentIndex(val);
     currentIndexRef.current = val;
+  };
+
+  // swipe card controller
+  const swipe = async (dir) => {
+    if (canSwipe && currentIndex < availableWorkers.length) {
+      await childRefs[currentIndex].current.swipe(dir);
+    }
   };
 
   const handleCardSwipe = (direction, item, index) => {
@@ -59,12 +69,6 @@ const CardStack = () => {
       };
       return [...prevSwipedWorkers, editedItem];
     });
-  };
-
-  const swipe = async (dir) => {
-    if (canSwipe && currentIndex < availableWorkers.length) {
-      await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
-    }
   };
 
   const cards = availableWorkers.map((worker, index) => (
