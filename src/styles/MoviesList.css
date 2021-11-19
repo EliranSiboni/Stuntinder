@@ -1,0 +1,23 @@
+.movies-list-wrapper {
+  padding: 0;
+}
+
+.movies-list__li {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  list-style-type: none;
+  padding: 1rem;
+  align-items: center;
+}
+
+.movies-list__item_title,
+.movies-list__item_actor {
+  font-family: "Ubuntu", sans-serif;
+  width: 100%;
+}
+
+.movies-list__item_actor {
+  font-weight: bold;
+}
