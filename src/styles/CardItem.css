@@ -1,7 +1,15 @@
+.cards-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
 .card-item__wrapper {
   position: relative;
   display: flex;
   justify-content: center;
+  height: 60vh;
 }
 
 .card-item {
@@ -10,6 +18,10 @@
   height: 30rem;
   border-radius: 10px;
   box-shadow: 5px 10px 18px #8888;
+}
+
+.card-item:hover {
+  cursor: grab;
 }
 
 .card-item__items-wrapper {

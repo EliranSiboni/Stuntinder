@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, createRef, useMemo } from "react";
 
 import CardItem from "./CardItem";
-import { workers } from "../workers";
-
-const LOCAL_STORAGE_KEY = "workers";
+import Buttons from "./Buttons";
+import { workers, LOCAL_STORAGE_KEY } from "../workers";
 
 const CardStack = () => {
   const [workersAfterSwipe, setSwipedWorkers] = useState([]);
   const [availableWorkers, setAvailableWorkers] = useState(workers);
+  const [currentIndex, setCurrentIndex] = useState(availableWorkers.length - 1);
+
+  const currentIndexRef = useRef(currentIndex);
+  const canSwipe = currentIndex >= 0;
 
   useEffect(() => {
     // load swiped workers and filter from the datastore
@@ -34,14 +37,40 @@ const CardStack = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(workersAfterSwipe));
   }, [workersAfterSwipe]);
 
-  const handleCardSwipe = (direction, item) => {
+  const childRefs = useMemo(
+    () =>
+      Array(availableWorkers.length)
+        .fill(0)
+        .map((i) => createRef()),
+    []
+  );
+
+  const updateCurrentIndex = (val) => {
+    setCurrentIndex(val);
+    currentIndexRef.current = val;
+  };
+
+  const handleCardSwipe = (direction, item, index) => {
+    updateCurrentIndex(index - 1);
     setSwipedWorkers((prevSwipedWorkers) => {
-      return [...prevSwipedWorkers, item];
+      const editedItem = {
+        ...item,
+        approved: direction === "right",
+      };
+      return [...prevSwipedWorkers, editedItem];
     });
   };
 
-  const cards = availableWorkers.map((worker) => (
+  const swipe = async (dir) => {
+    if (canSwipe && currentIndex < availableWorkers.length) {
+      await childRefs[currentIndex].current.swipe(dir); // Swipe the card!
+    }
+  };
+
+  const cards = availableWorkers.map((worker, index) => (
     <CardItem
+      itemRef={childRefs[index]}
+      index={index}
       key={worker.id.toString()}
       id={worker.id}
       name={worker.name}
@@ -52,14 +81,9 @@ const CardStack = () => {
   ));
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {cards}
+    <div>
+      <div className="cards-wrapper">{cards}</div>
+      <Buttons onSwipe={swipe} />
     </div>
   );
 };

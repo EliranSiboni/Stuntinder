@@ -4,26 +4,26 @@ import "../styles/CardItem.css";
 
 import CardInfo from "./CardInfo";
 
-const CardItem = ({ id, name, image, movies, onSwipe }) => {
+const CardItem = ({ id, name, image, movies, onSwipe, itemRef, index }) => {
   const HandleSwipe = (direction) => {
-    onSwipe(direction, {
-      id,
-      name,
-      image,
-      movies,
-    });
+    onSwipe(
+      direction,
+      {
+        id,
+        name,
+        image,
+        movies,
+      },
+      index
+    );
   };
-
-  //   const onCardLeftScreen = (myIdentifier) => {
-  //     console.log(myIdentifier + " left the screen");
-  //   };
 
   return (
     <div className="card-item__wrapper">
       <TinderCard
+        ref={itemRef}
         className="card-item"
         onSwipe={HandleSwipe}
-        // onCardLeftScreen={() => onCardLeftScreen("fooBar")}
         preventSwipe={["up", "down"]}
       >
         <div
