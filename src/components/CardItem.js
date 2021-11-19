@@ -1,62 +1,41 @@
 import React from "react";
-import { Frame, useMotionValue, useTransform, useAnimation } from "framer";
+import TinderCard from "react-tinder-card";
+import "../styles/CardItem.css";
 
 import CardInfo from "./CardInfo";
 
-const CardItem = ({ id, name, image, movies }) => {
-  // To move the card as the user drags the cursor
-  const motionValue = useMotionValue(0);
-
-  // To rotate the card as the card moves on drag
-  const rotateValue = useTransform(motionValue, [-200, 200], [-50, 50]);
-
-  // To decrease opacity of the card when swiped
-  const opacityValue = useTransform(
-    motionValue,
-    [-200, -150, 0, 150, 200],
-    [0, 1, 1, 1, 0]
-  );
-
-  // Framer animation hook
-  const animControls = useAnimation();
-
-  const style = {
-    backgroundImage: `url(${image})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundColor: "white",
-    boxShadow: "5px 10px 18px #888888",
-    borderRadius: 10,
-    height: "30rem",
-    width: "20rem",
+const CardItem = ({ id, name, image, movies, onSwipe }) => {
+  const HandleSwipe = (direction) => {
+    onSwipe(direction, {
+      id,
+      name,
+      image,
+      movies,
+    });
   };
 
-  return (
-    <Frame
-      center
-      // Card can be drag only on x-axis
-      drag="x"
-      x={motionValue}
-      rotate={rotateValue}
-      opacity={opacityValue}
-      dragConstraints={{ left: -1000, right: 1000 }}
-      style={style}
-      onDragEnd={(event, info) => {
-        // If the card is dragged only upto 150 on x-axis
-        // bring it back to initial position
-        if (Math.abs(info.point.x) <= 150) {
-          animControls.start({ x: 0 });
-        } else {
-          // If card is dragged beyond 150
-          // make it disappear
+  //   const onCardLeftScreen = (myIdentifier) => {
+  //     console.log(myIdentifier + " left the screen");
+  //   };
 
-          // Making use of ternary operator
-          animControls.start({ x: info.point.x < 0 ? -200 : 200 });
-        }
-      }}
-      children={<CardInfo name={name} movies={movies} />}
-    />
+  return (
+    <div className="card-item__wrapper">
+      <TinderCard
+        className="card-item"
+        onSwipe={HandleSwipe}
+        // onCardLeftScreen={() => onCardLeftScreen("fooBar")}
+        preventSwipe={["up", "down"]}
+      >
+        <div
+          className="card-item__items-wrapper"
+          style={{
+            backgroundImage: `url(${image})`,
+          }}
+        >
+          <CardInfo name={name} movies={movies} />
+        </div>
+      </TinderCard>
+    </div>
   );
 };
 
