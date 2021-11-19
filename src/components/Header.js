@@ -1,6 +1,7 @@
 import { AiTwotoneFire } from "react-icons/ai";
 import { BsArrowRepeat } from "react-icons/bs";
 import { LOCAL_STORAGE_KEY } from "../workers";
+import { Link } from "react-router-dom";
 
 import "../styles/Header.css";
 
@@ -21,7 +22,9 @@ const Header = () => {
         <button className="header__refresh-btn" onClick={handleRefresh}>
           <BsArrowRepeat size={30} class="refresh-btn" />
         </button>
-        <button className="header__stunts-btn">My stunts</button>
+        <Link className="header__stunts-btn" to="/stunts">
+          My stunts
+        </Link>
       </div>
     </div>
   );
