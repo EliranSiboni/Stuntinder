@@ -1,6 +1,8 @@
 import React from "react";
 import { Frame, useMotionValue, useTransform, useAnimation } from "framer";
 
+import CardInfo from "./CardInfo";
+
 const CardItem = ({ id, name, image, movies }) => {
   // To move the card as the user drags the cursor
   const motionValue = useMotionValue(0);
@@ -53,29 +55,7 @@ const CardItem = ({ id, name, image, movies }) => {
           animControls.start({ x: info.point.x < 0 ? -200 : 200 });
         }
       }}
-      children={
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            flexDirection: "column",
-            alignItems: "center",
-            flexWrap: "wrap",
-            height: "100%",
-          }}
-        >
-          <div
-            style={{
-              width: "100%",
-              backgroundColor: "white",
-              borderBottomLeftRadius: "5px",
-              borderBottomRightRadius: "5px",
-            }}
-          >
-            <h3>{name}</h3>
-          </div>
-        </div>
-      }
+      children={<CardInfo name={name} movies={movies} />}
     />
   );
 };
