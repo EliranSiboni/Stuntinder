@@ -1,0 +1,42 @@
+.header-wrapper {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row nowrap;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-shadow: rgb(136 136 136 / 53%) 5px 10px 18px;
+}
+
+.header__btns-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__refresh-btn {
+  background: none;
+  border: none;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.header__stunts-btn {
+  background: none;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 15px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.header__stunts-btn:hover {
+  background-color: #f54f5f;
+  color: white;
+  border-color: white;
+}
+
+.header__refresh-btn:hover > * {
+  color: #f54f5f;
+}
