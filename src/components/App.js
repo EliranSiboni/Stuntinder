@@ -12,7 +12,6 @@ function App() {
     <Router>
       <div className="App">
         <Header />
-
         <Routes>
           <Route path="/" element={<CardStack />} />
           <Route path="stunts" element={<Stunts />} />
