@@ -28,6 +28,9 @@ const CardStack = () => {
       // set available workers that did not swiped yet
       setAvailableWorkers(filteredWorkers);
 
+      // update current worker index
+      setCurrentIndex(filteredWorkers.length - 1);
+
       // init swiped workers
       setSwipedWorkers(swipedWorkers);
     }
@@ -44,7 +47,7 @@ const CardStack = () => {
       Array(availableWorkers.length)
         .fill(0)
         .map((i) => createRef()),
-    []
+    [availableWorkers]
   );
 
   // current ref index update
@@ -54,13 +57,13 @@ const CardStack = () => {
   };
 
   // swipe card controller
-  const swipe = async (dir) => {
+  const swipe = (dir) => {
     if (canSwipe && currentIndex < availableWorkers.length) {
-      await childRefs[currentIndex].current.swipe(dir);
+      childRefs[currentIndex].current.swipe(dir);
     }
   };
 
-  const handleCardSwipe = (direction, item, index) => {
+  const handleCardSwipe = async (direction, item, index) => {
     updateCurrentIndex(index - 1);
     setSwipedWorkers((prevSwipedWorkers) => {
       const editedItem = {
@@ -85,10 +88,20 @@ const CardStack = () => {
   ));
 
   return (
-    <div>
-      <div className="cards-wrapper">{cards}</div>
-      <Buttons onSwipe={swipe} />
-    </div>
+    <>
+      {currentIndex < 0 ? (
+        <div style={{ padding: 80 }}>
+          <h5 style={{ fontSize: 25, fontFamily: "Ubuntu" }}>
+            No more swipes try later :)
+          </h5>
+        </div>
+      ) : (
+        <div>
+          <div className="cards-wrapper">{cards}</div>
+          <Buttons onSwipe={swipe} />
+        </div>
+      )}
+    </>
   );
 };
 
