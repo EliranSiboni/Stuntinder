@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { AiTwotoneFire } from "react-icons/ai";
 import { BsArrowRepeat } from "react-icons/bs";
 import { LOCAL_STORAGE_KEY } from "../workers";
@@ -6,14 +8,20 @@ import { Link } from "react-router-dom";
 import "../styles/Header.css";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const handleRefresh = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEY);
     window.location.reload(false);
   };
 
+  const handleReturnToHomepage = () => {
+    navigate("/");
+  };
+
   return (
     <div className="header-wrapper">
-      <div className="header__btns-wrapper">
+      <div className="header__btns-wrapper" onClick={handleReturnToHomepage}>
         <AiTwotoneFire size={30} color={"#f54f5f"} />
         <h1>
           Stun<span style={{ color: "#f54f5f" }}>tinder</span>
