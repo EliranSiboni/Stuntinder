@@ -3,10 +3,15 @@ import React, { useEffect, useState, useRef, createRef, useMemo } from "react";
 import CardItem from "./CardItem";
 import Buttons from "./Buttons";
 import { workers, LOCAL_STORAGE_KEY } from "../workers";
+import { Portal } from "./Portal";
+import SwipeModal from "./SwipeModal";
+
+const HIDE_SWIPE_MODAL_KEY = "show_swipe_modal";
 
 const CardStack = () => {
   const [workersAfterSwipe, setSwipedWorkers] = useState([]);
   const [availableWorkers, setAvailableWorkers] = useState(workers);
+  const [showSwipeModal, setShowSwipeModal] = useState(0);
 
   // init current ref index
   const [currentIndex, setCurrentIndex] = useState(availableWorkers.length - 1);
@@ -14,6 +19,12 @@ const CardStack = () => {
   const canSwipe = currentIndex >= 0;
 
   useEffect(() => {
+    // check if needed to show the swipe modal
+    const hideModal = window.sessionStorage.getItem(HIDE_SWIPE_MODAL_KEY);
+    if (!hideModal) {
+      setShowSwipeModal(1);
+    }
+
     // load swiped workers and filter from the datastore
     const swipedWorkers = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     if (swipedWorkers) {
@@ -74,6 +85,12 @@ const CardStack = () => {
     });
   };
 
+  // handle swipe modal
+  const handleSwipeModalToggle = () => {
+    window.sessionStorage.setItem(HIDE_SWIPE_MODAL_KEY, 1);
+    setShowSwipeModal(0);
+  };
+
   const cards = availableWorkers.map((worker, index) => (
     <CardItem
       itemRef={childRefs[index]}
@@ -87,6 +104,8 @@ const CardStack = () => {
     />
   ));
 
+  console.log(showSwipeModal);
+
   return (
     <>
       {currentIndex < 0 ? (
@@ -99,6 +118,11 @@ const CardStack = () => {
         <div>
           <div className="cards-wrapper">{cards}</div>
           <Buttons onSwipe={swipe} />
+          <Portal>
+            {showSwipeModal && (
+              <SwipeModal toggleModal={handleSwipeModalToggle} />
+            )}
+          </Portal>
         </div>
       )}
     </>
