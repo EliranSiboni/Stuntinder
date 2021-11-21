@@ -26,11 +26,13 @@
   padding: 10px;
   justify-content: center;
   align-items: center;
+  border: 1px solid #009e2d;
 }
 
 .items-wrapper__reject-btn {
   font-size: 40px;
   color: #eb3434;
+  border: 1px solid #eb3434;
 }
 
 .items-wrapper__approve-btn > .approve-btn {
