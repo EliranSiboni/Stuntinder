@@ -2,6 +2,10 @@
 
 THE ULTIMATE PLATFORM TO FIND YOUR NEW DOUBLE STUNT ACTOR
 
+1. clone repository
+2. `$ npm install`
+3. `$ npm run start`
+
 ## Available Scripts
 
 In the project directory, you can run:
