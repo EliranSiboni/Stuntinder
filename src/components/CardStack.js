@@ -104,8 +104,6 @@ const CardStack = () => {
     />
   ));
 
-  console.log(showSwipeModal);
-
   return (
     <>
       {currentIndex < 0 ? (
