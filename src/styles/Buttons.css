@@ -11,30 +11,26 @@
   justify-content: space-between;
   align-items: center;
 }
-
-.items-wrapper__approve-btn {
+.items-wrapper__approve-btn,
+.items-wrapper__reject-btn {
+  width: 60px;
+  height: 60px;
   border: none;
   background: none;
-  font-size: 40px;
   border-radius: 50px;
   box-shadow: rgb(136 136 136 / 53%) 5px 5px 5px;
+  cursor: pointer;
+}
+.items-wrapper__approve-btn {
   display: flex;
   padding: 10px;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 }
 
 .items-wrapper__reject-btn {
-  border: none;
-  background: none;
   font-size: 40px;
   color: #eb3434;
-  border-radius: 50px;
-  width: 60px;
-  height: 60px;
-  box-shadow: rgb(136 136 136 / 53%) 5px 5px 5px;
-  cursor: pointer;
 }
 
 .items-wrapper__approve-btn > .approve-btn {

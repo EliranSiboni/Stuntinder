@@ -1,4 +1,4 @@
-import { BsFillHeartFill } from "react-icons/bs";
+import { BsFillCameraReelsFill } from "react-icons/bs";
 
 import "../styles/Buttons.css";
 
@@ -16,7 +16,7 @@ const Buttons = ({ onSwipe }) => {
           className="items-wrapper__approve-btn"
           onClick={() => onSwipe("right")}
         >
-          <BsFillHeartFill className="approve-btn" size={40} />
+          <BsFillCameraReelsFill className="approve-btn" size={35} />
         </button>
       </div>
     </div>
