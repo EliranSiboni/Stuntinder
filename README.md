@@ -2,6 +2,8 @@
 
 THE ULTIMATE PLATFORM TO FIND YOUR NEW DOUBLE STUNT ACTOR
 
+![alt text](https://github.com/EliranSiboni/Stuntinder/blob/main/public/screenshot.png?raw=true)
+
 1. clone repository
 2. `$ npm install`
 3. `$ npm run start`
