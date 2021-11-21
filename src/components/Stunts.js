@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useGetStunts } from "../hooks/useGetStunts";
 
 import "../styles/Stunts.css";
@@ -17,6 +17,7 @@ const Stunts = () => {
   const stuntsItems = swipedStunts.map((stunt) => {
     return (
       <div
+        key={stunt.id}
         className="card-wrapper"
         style={{
           backgroundImage: `url(${stunt.image})`,
