@@ -8,6 +8,7 @@ import "../styles/Header.css";
 const Header = () => {
   const handleRefresh = () => {
     localStorage.removeItem(LOCAL_STORAGE_KEY);
+    window.location.reload(false);
   };
 
   return (
@@ -20,7 +21,7 @@ const Header = () => {
       </div>
       <div className="header__btns-wrapper">
         <button className="header__refresh-btn" onClick={handleRefresh}>
-          <BsArrowRepeat size={30} class="refresh-btn" />
+          <BsArrowRepeat size={30} className="refresh-btn" />
         </button>
         <Link className="header__stunts-btn" to="/stunts">
           My stunts
